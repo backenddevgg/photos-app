@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <style>
+        * {
+            transition: all 330ms ease-in-out;
+        }
+        #fileTreeToggleButton {
+            cursor:pointer;
+            user-select: none;
+        }
+        span.fileTree {
+            display:block;
+        }
+        span.fileTree b {
+            color:chocolate;
+            padding: 0 3px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WELCOME</h1>
+    </header>
+    <section>
+        <h3 onclick="toggleFileTree()" id="fileTreeToggleButton">Toggle file tree</h3>
+        <div id="fileTree" style="display:none">
+            {{FILETREE}}
+        </div>
+    </section>
+    <script>
+        const toggleFileTree = () => {
+            const element = document.getElementById("fileTree")
+            const display = element.style.display
+            if(display == "block") element.style.display = "none"
+            else element.style.display = "block"
+        }
+        //replace fileTree's \ by <b>\</b>
+        document.getElementById("fileTree").querySelectorAll("span").forEach(el => {
+            let s = "";
+            for(i = 0; i < el.innerHTML.length; i++) {
+                if(el.innerHTML[i] == "\\") s += "<b>\\</b>"
+                else s += el.innerHTML[i]
+            }
+            el.innerHTML = s
+        })
+    </script>
+</body>
+</html>
